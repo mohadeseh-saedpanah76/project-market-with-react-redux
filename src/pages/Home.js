@@ -1,25 +1,31 @@
-import React , {useState , useEffect} from "react";
+import React  from "react";
 import { Row, Col } from "react-bootstrap";
-import axios from "axios";
+// import axios from "axios";
 // چون فایل جیسون محصولات در بک اند هست باید با استفاده از اکسیوس اونارو بگیریم از بک اند
 // و اینجا به استیت نیاز داریم
 
 import Product from "../components/Product/Product";
 
+import products from "../products";
+
 
 const Home =()=>{
-    const [products , setProducts] = useState([])
 
-    useEffect(()=>{
-        const sendRequest = async ()=>{
-         const response =  await axios.get('http://localhost:8000/api/products')
-        //  اپدیت استیت باید در تابع ایسینک باشه
-         setProducts(response.data)
-        }
+     // زمانی که اطلاعات جیسون محصول در بک اند باشه باید با اکسیوس اونارو از بک اند بگیری
+    // اما چون بک اند پروژه اینجا کار نمیکرد اطلعات از فایل داخل اس ار سی گرفتیم
 
-        // تابع ایسینک داخل یوز افمت باید فراخوانی شود
-        sendRequest()
-    },[])
+    // const [products , setProducts] = useState([])
+
+    // useEffect(()=>{
+    //     const sendRequest = async ()=>{
+    //      const response =  await axios.get('http://localhost:8000/api/products')
+    //     //  اپدیت استیت باید در تابع ایسینک باشه
+    //      setProducts(response.data)
+    //     }
+
+    //     // تابع ایسینک داخل یوز افمت باید فراخوانی شود
+    //     sendRequest()
+    // },[])
 
     return(
         <div>

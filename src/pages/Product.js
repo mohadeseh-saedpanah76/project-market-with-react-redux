@@ -1,37 +1,44 @@
 // این کامپوننت صفحه ای است که جزئیات هرمحصول رو نمایش میده
-import React , {useState , useEffect} from "react";
-import axios from "axios";
-import { Link ,useParams ,useMatch  } from "react-router-dom";
+// import React , {useState , useEffect} from "react";
+import React from "react";
+// import axios from "axios";
+import { Link ,useParams } from "react-router-dom";
 import { Row, Col , ListGroup, Image, Button } from "react-bootstrap";
 
-
+import products from '../products'
 
 const Product = ()=>{
 
-    // const {id} = useParams()
-    // // می دانیم بر اساس ایدی که در یوآرال میاد یعنی روی یک محصول مورد نظر کلیک شده و باید صفحه ی آن نمایش داده شود
-    // // در ارایه ی محصولات فایند می زنیم
-    // // می گوییم هرجا ایدی یک محصول در ارایه برابر بود با ایدی محصولی که کلیک شده و ایدی اون در یوآر ال هست
-    // // اون محصول فایند میشه
-    // const product =  products.find((item)=>{
-    //     return item._id === id
-    //     // ایدی زرد رنگ ایدی داینامیک هرمحصوله که در یوآرال اومده
-    // })
+    const {id} = useParams()
+
+    // می دانیم بر اساس ایدی که در یوآرال میاد یعنی روی یک محصول مورد نظر کلیک شده و باید صفحه ی آن نمایش داده شود
+    // در ارایه ی محصولات فایند می زنیم
+    // می گوییم هرجا ایدی یک محصول در ارایه برابر بود با ایدی محصولی که کلیک شده و ایدی اون در یوآر ال هست
+    // اون محصول فایند میشه
+    const product =  products.find((item)=>{
+        return item._id === id
+        // ایدی زرد رنگ ایدی داینامیک هرمحصوله که در یوآرال اومده
+    })
     // تابع فایند مقدار پروداکتی که ایدی اون با ایدی محصول داخل یوآرال یکی بود رو پیدا میکنه
 
-    // چون می خواهیم از اکسیوس استفاده کنیم به تابع فایند بالا نیازی نداریم
-    const {id} = useParams()
-    const match = useMatch()
-    const [product , setProduct] = useState({})
+
+
+    // زمانی که اطلاعات جیسون محصول در بک اند باشه باید با اکسیوس اونارو از بک اند بگیری
+    // اما چون بک اند پروژه اینجا کار نمیکرد اطلعات از فایل داخل اس ار سی گرفتیم
+
+    // // چون می خواهیم از اکسیوس استفاده کنیم به تابع فایند بالا نیازی نداریم
+    // const {id} = useParams()
+    // const match = useMatch()
+    // const [product , setProduct] = useState({})
     
      
-    useEffect(()=>{
-         const sendRequst = async ()=>{
-         const response = await axios.get(`http://localhost:8000/api/products/${match.params.id}`)
-         setProduct(response.data)
-        }
-        sendRequst()
-    },[match, id])
+    // useEffect(()=>{
+    //      const sendRequst = async ()=>{
+    //      const response = await axios.get(`http://localhost:8000/api/products/${match.id}`)
+    //      setProduct(response.data)
+    //     }
+    //     sendRequst()
+    // },[match, id]) 
 
 
     return(
