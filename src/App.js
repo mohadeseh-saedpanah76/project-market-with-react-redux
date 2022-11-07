@@ -18,6 +18,7 @@ const App = ()=>{
                         <Route path="/" element={<Home/>}/>
                         <Route path="/product/:id" element={<Product/>}/>
                         {/* مقدار دو نقطه آیدی یک مقدار داینامیکه */}
+                        {/* روت دوم ادرس صفحه ی جزئیات هر محصوله */}
                     </Routes>
                 </Container>    
             </main>
