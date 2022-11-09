@@ -2,14 +2,20 @@
 // import React , {useState , useEffect} from "react";
 import React from "react";
 // import axios from "axios";
-import { Link ,useParams } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+import { Link ,useParams , useNavigate } from "react-router-dom";
 import { Row, Col , ListGroup, Image, Button } from "react-bootstrap";
+// import { productDetailAction } from "../action/productAction";
 
 import products from '../products'
+
 
 const Product = ()=>{
 
     const {id} = useParams()
+    // ایدی که یوز پارامس برمیگردونه ایدی هرمحصول خاص در یوآرال هست
+    const history = useNavigate()
+
 
     // می دانیم بر اساس ایدی که در یوآرال میاد یعنی روی یک محصول مورد نظر کلیک شده و باید صفحه ی آن نمایش داده شود
     // در ارایه ی محصولات فایند می زنیم
@@ -21,25 +27,12 @@ const Product = ()=>{
     })
     // تابع فایند مقدار پروداکتی که ایدی اون با ایدی محصول داخل یوآرال یکی بود رو پیدا میکنه
 
-
-
-    // زمانی که اطلاعات جیسون محصول در بک اند باشه باید با اکسیوس اونارو از بک اند بگیری
-    // اما چون بک اند پروژه اینجا کار نمیکرد اطلعات از فایل داخل اس ار سی گرفتیم
-
-    // // چون می خواهیم از اکسیوس استفاده کنیم به تابع فایند بالا نیازی نداریم
-    // const {id} = useParams()
-    // const match = useMatch()
-    // const [product , setProduct] = useState({})
-    
-     
-    // useEffect(()=>{
-    //      const sendRequst = async ()=>{
-    //      const response = await axios.get(`http://localhost:8000/api/products/${match.id}`)
-    //      setProduct(response.data)
-    //     }
-    //     sendRequst()
-    // },[match, id]) 
-
+    const addToCartHandler =()=>{
+        // می خواهیم زمانی که روی دکمه ی افزودن به سبد خرید کلیک شد
+        // ریدایرکت بشه به صفحه ی سبد خرید برای اون محصول مورد نظر
+        // بجای استفاده از کامپوننت نویگیت باید از یوزنویگیت استفاده کنی
+        history(`/cart/${id}`)
+    }
 
     return(
         // حالا که اون محصولی که روش کلیلک شده رو پیدا کردی باید مشخصات اون رو نمایش بدی
@@ -69,13 +62,73 @@ const Product = ()=>{
                 </Col>
 
                 <Col md={3}>
-                    <Button className="btn-block" type="button">
+                    <Button 
+                    onClick={addToCartHandler}
+                    className="btn-block" 
+                    type="button">
                         افزودن به سبد خرید
                     </Button>
                 </Col>
             </Row>
         </div>
     )
+
+
+
+    // {
+
+    // زمانی که اطلاعات جیسون محصول در بک اند باشه باید با اکسیوس اونارو از بک اند بگیری
+    // اما چون بک اند پروژه اینجا کار نمیکرد اطلعات از فایل داخل اس ار سی گرفتیم
+
+    // // چون می خواهیم از اکسیوس استفاده کنیم به تابع فایند بالا نیازی نداریم
+    // const {id} = useParams()
+    // const match = useMatch()
+    // const [product , setProduct] = useState({})
+    
+     
+    // useEffect(()=>{
+    //      const sendRequst = async ()=>{
+    //      const response = await axios.get(`http://localhost:8000/api/products/${match.id}`)
+    //      setProduct(response.data)
+    //     }
+    //     sendRequst()
+    // },[match, id]) 
+
+    // }
+
+
+
+    
+
+    // {
+
+    // const dispatch = useDispatch()
+    // خروجی یوز دیسپچ یک دیس پچ هست
+    // و چون دیپسپچ یک درخواست ای پی ای رو داره در خودش اونو در یوز افکت فراخوانی میکنیم
+
+    // const {id} = useParams()
+    // const match = useMatch()
+
+    // const productDetail = useSelector((state)=>{
+    //         state.productDetail
+    //    })
+
+    // const {loading , product} = productDetail
+    // مقدار لودینگ رو بصورت شرطی در جی اس ایکس میاریم
+    // یعنی اگر لودینگ وجود داشت بزن در حال دریافت محصول
+    // در غیر این صورت مقدار جی اس ایکس یک محصول رو نمایش بده
+
+
+    // useEffect(()=>{
+    //      dispatch(producyDetailAction(match.id))
+            // ورودی دیسپچ تابع مربوط به اکشن جزئیات محصوله
+    //  },[dispatch , match])
+
+
+    // }
+
+
+   
 }
 
 export default Product
