@@ -1,4 +1,4 @@
-import {createStore , combineReducer , applyMiddleware} from 'redux'
+import {createStore ,combineReducers, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 // تابع کامباین ردیوسر یک تابع کمکی است و کمک میکند ابجکتی ریترن کنیم که ولیوهای متفاوتی داشته باشد
 // به عبارت دیگر میتونیم اگر چندتا ردیوسر داریم انها را به کمک این تابع ادغام کنیم
@@ -8,13 +8,13 @@ import thunk from 'redux-thunk'
 import { productListReducer , productDetailReducer } from './reducer/productReducer'
 import { cartReducer } from './reducer/cartReduser'
 
-const reducer = combineReducer({
+const reducer = combineReducers({
     productList : productListReducer,
     productDetail : productDetailReducer,
     // در پروداکت لیست استیت لیست محصولات قرار دارد
     // در پروداکت دیتیلز استیت جزئیات هر محصول قرار داره
 
-    cartList : cartReducer,
+    cart : cartReducer,
 })
 // ورودی تابع بالا یک ابجکته که ردیوسر های مختلف اگر داشته باشیم در ان قرار میگیرد
 // یعنی اگر چندین تابع ردیوسر داشته باشیم انهارا کنار هم در ابجکت ورودی تابع کامباین ردیوسر میذاریم
@@ -24,6 +24,8 @@ const reducer = combineReducer({
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems') 
     ? JSON.stringify(localStorage.getItem('cartItems'))
     : []
+
+
 const initialState = {
     // باید به استیت سبد خرید یک مقدار اولیه بدی
     // که مقدار اولیه ی اون چیزیه که از لوکال استورج هست

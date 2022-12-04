@@ -1,31 +1,57 @@
 // این کامپوننت صفحه ای است که جزئیات هرمحصول رو نمایش میده
 // import React , {useState , useEffect} from "react";
-import React from "react";
+import React , { useEffect } from "react";
 // import axios from "axios";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link ,useParams , useNavigate } from "react-router-dom";
 import { Row, Col , ListGroup, Image, Button } from "react-bootstrap";
-// import { productDetailAction } from "../action/productAction";
+import { productDetailAction } from "../action/productAction";
 
-import products from '../products'
+// import products from '../products'
 
 
 const Product = ()=>{
+    
 
-    const {id} = useParams()
+    // {
+    // کدهای کامنت شده زیر برای وقتی هست که بخواهیم اطلاعات محصول از فایل داخل پروژه بگیریم اگه اطلاعات در بک اند باشه باید از یوزافکت استفاده کرد
+
+    // // می دانیم بر اساس ایدی که در یوآرال میاد یعنی روی یک محصول مورد نظر کلیک شده و باید صفحه ی آن نمایش داده شود
+    // // در ارایه ی محصولات فایند می زنیم
+    // // می گوییم هرجا ایدی یک محصول در ارایه برابر بود با ایدی محصولی که کلیک شده و ایدی اون در یوآر ال هست
+    // // اون محصول فایند میشه
+    // const product =  products.find((item)=>{
+    //     return item._id === id
+    //     // ایدی زرد رنگ ایدی داینامیک هرمحصوله که در یوآرال اومده
+    // })
+    // // تابع فایند مقدار پروداکتی که ایدی اون با ایدی محصول داخل یوآرال یکی بود رو پیدا میکنه
+
+    // }
+
     // ایدی که یوز پارامس برمیگردونه ایدی هرمحصول خاص در یوآرال هست
+    const {id} = useParams()
     const history = useNavigate()
+    const dispatch = useDispatch()
+    // خروجی یوز دیسپچ یک دیس پچ هست
+    // و چون دیپسپچ یک درخواست ای پی ای رو داره در خودش اونو در یوز افکت فراخوانی میکنیم
+    // const match = useMatch()
+
+    const productDetail = useSelector((state)=>state.productDetail)
+
+     const {loading , product} = productDetail
+    // مقدار لودینگ رو بصورت شرطی در جی اس ایکس میاریم
+    // یعنی اگر لودینگ وجود داشت بزن در حال دریافت محصول
+    // در غیر این صورت مقدار جی اس ایکس یک محصول رو نمایش بده
 
 
-    // می دانیم بر اساس ایدی که در یوآرال میاد یعنی روی یک محصول مورد نظر کلیک شده و باید صفحه ی آن نمایش داده شود
-    // در ارایه ی محصولات فایند می زنیم
-    // می گوییم هرجا ایدی یک محصول در ارایه برابر بود با ایدی محصولی که کلیک شده و ایدی اون در یوآر ال هست
-    // اون محصول فایند میشه
-    const product =  products.find((item)=>{
-        return item._id === id
-        // ایدی زرد رنگ ایدی داینامیک هرمحصوله که در یوآرال اومده
-    })
-    // تابع فایند مقدار پروداکتی که ایدی اون با ایدی محصول داخل یوآرال یکی بود رو پیدا میکنه
+     useEffect(()=>{
+         dispatch(productDetailAction(id))
+            // ورودی دیسپچ تابع مربوط به اکشن جزئیات محصوله
+     },[dispatch,id])
+
+
+     
+
 
     const addToCartHandler =()=>{
         // می خواهیم زمانی که روی دکمه ی افزودن به سبد خرید کلیک شد
@@ -41,7 +67,10 @@ const Product = ()=>{
                 بازگشت به صفحه ی اصلی
             </Link>
 
-            <Row>
+            {loading ? (
+                <h2>در حال دریافت محصول...</h2>
+            ):(
+                <Row>
                 <Col md={6}>
                     <Image src={product.image} fluid/>
                 </Col>
@@ -70,10 +99,12 @@ const Product = ()=>{
                     </Button>
                 </Col>
             </Row>
+            )}
+           
         </div>
     )
 
-
+  }
 
     // {
 
@@ -128,7 +159,6 @@ const Product = ()=>{
     // }
 
 
-   
-}
+
 
 export default Product

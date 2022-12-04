@@ -9,7 +9,10 @@ export const productListAction =()=> async (dispatch)=>{
         // چیزی که توی دیتا هست همون محصولات ما هست
         const {data} = await axios.get('http://localhost:8000/api/products')
 
-        dispatch({type:'PRODUCT_LIST_SUCCESS' , payload : data})
+        dispatch({
+            type:'PRODUCT_LIST_SUCCESS' ,
+            payload : data,
+        })
     } catch (error) {
         console.log(error)
     }
